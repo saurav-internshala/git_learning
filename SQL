@@ -1,0 +1,61 @@
+1). mysql> SHOW DATABASES;
+
+2). mysql> DROP DATABASE test;
+
+3). mysql> CREATE DATABASE test;
+
+4). mysql> USE test;
+    Database changed
+
+5). mysql> CREATE TABLE category(
+    -> cat_id INT NOT NULL AUTO_INCREMENT,
+    -> cat_name VARCHAR(40),
+    -> status INT DEFAULT 0,
+    -> PRIMARY KEY(cat_id)
+    -> );
+
+6). mysql> SHOW TABLES;
+
+7). mysql> DESCRIBE category;
+
+8). mysql> ALTER TABLE category ADD created_at DATETIME DEFAULT CURRENT_TIMESTAMP;
+
+9). mysql> INSERT INTO category (cat_name) VALUES("fruits");
+
+10). mysql> SELECT * FROM category;
+
+     mysql> SELECT cat_name FROM category where DATE(created_at)=DATE(NOW());
+
+     mysql> SELECT DATE(created_at) as Date,  DAYNAME(created_at) AS 'Day Name' FROM category WHERE date(created_at) < DATE_SUB(DATE(NOW()), INTERVAL 7 DAY);
+
+11). mysql> UPDATE category set cat_name="vegetables" where cat_name="fruits";
+
+12). CREATE TABLE test( id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, name VARCHAR(30), email VARCHAR(30), UNIQUE KEY(email) );
+
+13). mysql> DROP TABLE test;
+
+14). mysql> delete from category where cat_id=3;
+
+15). ALTER TABLE sub_category ADD FOREIGN KEY(cat_id) REFERENCES category(cat_id);
+
+16). mysql> ALTER TABLE sub_category MODIFY id INT AUTO_INCREMENT;
+
+17). mysql> SELECT * FROM sub_category AS sc INNER JOIN category AS c ON sc.cat_id=c.cat_id;
+
+18). CREATE TABLE product( id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, name VARCHAR(30), price INT, cat_id INT, FOREIGN KEY(cat_id) REFERENCES category(cat_id));
+
+19). CREATE TABLE user_order( order_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, p_id INT, u_id INT, created_at DATETIME DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY(p_id) REFERENCES product(id), FOREIGN KEY(u_id) REFERENCES user(id));
+
+20).  select * from user_order as o inner join  product as p 
+    -> on p.id=o.p_id
+    -> inner join user as u on u.id=o.u_id;
+
+21). mysql> CREATE INDEX user_name_index ON user(name);
+
+22). mysql> SHOW INDEX FROM user; 
+
+
+
+
+
+
